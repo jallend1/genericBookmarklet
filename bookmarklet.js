@@ -7,9 +7,16 @@ javascript: (function () {
   };
 
   const copyItemToClipboard = () => {
-    // const mostRecentItem = selectMostRecentItem();
     const requestNumber = selectMostRecentItem();
     navigator.clipboard.writeText(requestNumber);
+  };
+
+  const insertDivAtBottom = () => {
+    const div = document.createElement('div');
+    div.id = 'bookmarklet';
+    div.style = 'position: fixed; bottom: 0; left: 0; width: 100%; height: 50px; background-color: red; z-index: 9999; text-align: center;';
+    div.textContent = 'Return slip mode activated! Refresh to exit.';
+    document.body.appendChild(div);
   };
 
   document.addEventListener('keydown', function (e) {
@@ -19,4 +26,6 @@ javascript: (function () {
       window.open('https://regal-pithivier-abc90d.netlify.app/' + selectMostRecentItem(), '_blank');
     }
   });
+
+  insertDivAtBottom();
 })();
