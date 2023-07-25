@@ -11,9 +11,13 @@ javascript: !(function () {
         const t = e();
         navigator.clipboard.writeText(t);
       })(),
-      window.open(
-        'https://regal-pithivier-abc90d.netlify.app/' + e(),
-        '_blank'
+      setTimeout(
+        () =>
+          window.open(
+            'https://regal-pithivier-abc90d.netlify.app/' + e(),
+            '_blank'
+          ),
+        500
       ));
   }),
     (() => {

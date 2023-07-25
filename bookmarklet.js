@@ -25,9 +25,14 @@ javascript: (function () {
   document.addEventListener('keyup', function (e) {
     if (e.key === 'Enter') {
       copyItemToClipboard();
-      window.open(
-        'https://regal-pithivier-abc90d.netlify.app/' + selectMostRecentItem(),
-        '_blank'
+      setTimeout(
+        () =>
+          window.open(
+            'https://regal-pithivier-abc90d.netlify.app/' +
+              selectMostRecentItem(),
+            '_blank'
+          ),
+        500
       );
     }
   });
