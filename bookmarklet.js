@@ -1,4 +1,8 @@
 javascript: (function () {
+  const RECEIPT_PRINTER_URL = 'https://regal-pithivier-abc90d.netlify.app/';
+
+  // Targets the just scanned item, and returns the WorldShare
+  // number after removing IL prefix from the call number
   const selectMostRecentItem = () => {
     const callNumberField = document.querySelector(
       '#staff-content-container > ng-component > eg-grid > div > eg-grid-body > div > div:nth-child(1) > div:nth-child(6) > eg-grid-body-cell > span'
@@ -8,25 +12,11 @@ javascript: (function () {
     return callNumberWithoutPrefix;
   };
 
-  // Potential feature: Get title from item record
-  const getTitle = () => {
-    const titleField = document.querySelector(
-      '#staff-content-container > ng-component > eg-grid > div > eg-grid-body > div > div:nth-child(1) > div:nth-child(10) > eg-grid-body-cell > span > a'
-    );
-    const title = titleField.innerText;
-    const titleWithoutPrefix = title.slice(11);
-    return titleWithoutPrefix;
-  };
-
-  // Potential feature: Copy request number to clipboard
-  const copyItemToClipboard = () => {
-    const requestNumber = selectMostRecentItem();
-    navigator.clipboard.writeText(requestNumber);
-  };
-
-  const insertDivAtBottom = () => {
+  // Inserts noisy alert box at bottom of page so user is
+  // prepared for what kinda mess they're getting into
+  const scienceModeAlert = () => {
     const div = document.createElement('div');
-    div.id = 'bookmarklet';
+    div.id = 'science-mode-alert';
     div.style =
       'position: fixed; bottom: 0; left: 0; width: 100%; height: 50px; color: white; font-size: 2rem; background-color: red; z-index: 9999; text-align: center;';
     div.textContent =
@@ -34,20 +24,17 @@ javascript: (function () {
     document.body.appendChild(div);
   };
 
+  // Listens for enter keypress, waits 500ms to allow data to load, then opens up the
+  //  receipt printer with WorldShare request number as URL parameter for barcode printing
   document.addEventListener('keyup', function (e) {
     if (e.key === 'Enter') {
-      // copyItemToClipboard();
       setTimeout(
         () =>
-          window.open(
-            'https://regal-pithivier-abc90d.netlify.app/' +
-              selectMostRecentItem(),
-            '_blank'
-          ),
+          window.open(RECEIPT_PRINTER_URL + selectMostRecentItem(), '_blank'),
         500
       );
     }
   });
 
-  insertDivAtBottom();
+  scienceModeAlert();
 })();
