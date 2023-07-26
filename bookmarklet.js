@@ -8,6 +8,17 @@ javascript: (function () {
     return callNumberWithoutPrefix;
   };
 
+  // Potential feature: Get title from item record
+  const getTitle = () => {
+    const titleField = document.querySelector(
+      '#staff-content-container > ng-component > eg-grid > div > eg-grid-body > div > div:nth-child(1) > div:nth-child(10) > eg-grid-body-cell > span > a'
+    );
+    const title = titleField.innerText;
+    const titleWithoutPrefix = title.slice(11);
+    return titleWithoutPrefix;
+  };
+
+  // Potential feature: Copy request number to clipboard
   const copyItemToClipboard = () => {
     const requestNumber = selectMostRecentItem();
     navigator.clipboard.writeText(requestNumber);
@@ -17,14 +28,15 @@ javascript: (function () {
     const div = document.createElement('div');
     div.id = 'bookmarklet';
     div.style =
-      'position: fixed; bottom: 0; left: 0; width: 100%; height: 50px; background-color: red; z-index: 9999; text-align: center;';
-    div.textContent = 'Return slip mode activated! Refresh to exit.';
+      'position: fixed; bottom: 0; left: 0; width: 100%; height: 50px; color: white; font-size: 2rem; background-color: red; z-index: 9999; text-align: center;';
+    div.textContent =
+      "Jason's Slip Mode for Science Experience activated! Refresh to exit.";
     document.body.appendChild(div);
   };
 
   document.addEventListener('keyup', function (e) {
     if (e.key === 'Enter') {
-      copyItemToClipboard();
+      // copyItemToClipboard();
       setTimeout(
         () =>
           window.open(

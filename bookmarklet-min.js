@@ -7,10 +7,6 @@ javascript: !(function () {
       .innerText.slice(2);
   document.addEventListener('keyup', function (t) {
     'Enter' === t.key &&
-      ((() => {
-        const t = e();
-        navigator.clipboard.writeText(t);
-      })(),
       setTimeout(
         () =>
           window.open(
@@ -18,14 +14,15 @@ javascript: !(function () {
             '_blank'
           ),
         500
-      ));
+      );
   }),
     (() => {
       const e = document.createElement('div');
       (e.id = 'bookmarklet'),
         (e.style =
-          'position: fixed; bottom: 0; left: 0; width: 100%; height: 50px; background-color: red; z-index: 9999; text-align: center;'),
-        (e.textContent = 'Return slip mode activated! Refresh to exit.'),
+          'position: fixed; bottom: 0; left: 0; width: 100%; height: 50px; color: white; font-size: 2rem; background-color: red; z-index: 9999; text-align: center;'),
+        (e.textContent =
+          "Jason's Slip Mode for Science Experience activated! Refresh to exit."),
         document.body.appendChild(e);
     })();
 })();
